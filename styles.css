@@ -1,0 +1,845 @@
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --text-color: #1f2937;
+    --text-light: #6b7280;
+    --background-color: #ffffff;
+    --background-alt: #f3f4f6;
+    --border-color: #e5e7eb;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--background-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 100%;
+    padding: 0.75rem;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.logo img {
+    width: 32px;
+    height: 32px;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.lang-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.lang-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    background: var(--background-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.contact-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Hero Section */
+.hero {
+    padding-top: calc(56px + 1rem);
+    padding-bottom: 2rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="0.5" stroke-dasharray="5,5"/></svg>') repeat;
+    opacity: 0.1;
+    animation: rotate 20s linear infinite;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.hero .subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.hero .description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.hero .cta-button {
+    position: relative;
+    z-index: 100;
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    background: var(--primary-color-dark);
+}
+
+.hero .content {
+    position: relative;
+    z-index: 10;
+}
+
+/* Case Studies Section */
+.case-studies {
+    padding: 2rem 0;
+    background: var(--background-alt);
+    position: relative;
+    overflow: hidden;
+}
+
+.case-studies h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.case-studies-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+    width: 100%;
+}
+
+.case-card {
+    flex: 0 0 100%;
+    padding: 1.5rem;
+    margin: 0 1rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.case-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.case-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--primary-color);
+}
+
+.manual-metrics, .automated-metrics {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.manual-metrics {
+    background: var(--background-alt);
+}
+
+.automated-metrics {
+    background: rgba(37, 99, 235, 0.1);
+}
+
+.manual-metrics h4, .automated-metrics h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+}
+
+.automated-metrics h4 {
+    color: var(--primary-color);
+}
+
+.manual-metrics p, .automated-metrics p {
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.slider-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.prev-btn, .next-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    pointer-events: auto;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    background: var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.dot.active {
+    background: var(--primary-color);
+    transform: scale(1.2);
+}
+
+/* Benefits Section */
+.benefits {
+    padding: 4rem 2rem;
+    background: white;
+}
+
+.benefits h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.benefits .subtitle {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+}
+
+.benefits-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--background-alt);
+    border-radius: 1rem;
+    transition: all 0.3s;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-card h3 {
+    margin: 1rem 0;
+    font-size: 1.25rem;
+}
+
+.benefit-card p {
+    color: var(--text-light);
+}
+
+/* Implementation Section */
+.implementation {
+    padding: 4rem 2rem;
+    background: var(--background-alt);
+}
+
+.implementation h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.implementation .subtitle {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+}
+
+.implementation-steps {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.step-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.step-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.step-card p {
+    color: var(--text-light);
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 4rem 2rem;
+    background: white;
+}
+
+.testimonials h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.testimonials .subtitle {
+    text-align: center;
+    color: var(--text-light);
+    margin-bottom: 3rem;
+}
+
+.testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: var(--background-alt);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card blockquote {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-card .author {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.testimonial-card .role {
+    color: var(--text-light);
+}
+
+/* CTA Section */
+.cta {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta .subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    position: relative;
+    z-index: 100;
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    background: var(--primary-color-dark);
+}
+
+/* Form Section */
+.form {
+    padding: 4rem 2rem;
+    background: var(--background-color);
+}
+
+.form h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.form-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.form-features {
+    padding: 2rem;
+    background: var(--background-alt);
+    border-radius: 1rem;
+}
+
+.form-features h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-features ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-features li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.form-features li svg {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.form-features i {
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+#contact-form input {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    width: 100%;
+}
+
+#contact-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+#contact-form button {
+    padding: 1rem 2rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#contact-form button:hover {
+    background: var(--secondary-color);
+}
+
+.privacy {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/* Footer */
+footer {
+    padding: 2rem;
+    background: var(--text-color);
+    color: white;
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 0.5rem;
+}
+
+/* Animations */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    header {
+        padding: 0.5rem;
+        height: auto;
+    }
+
+    .nav-container {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1rem;
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .logo img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .nav-controls {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-content: center;
+        gap: 0.75rem;
+        margin-top: 0.25rem;
+    }
+
+    .lang-buttons {
+        gap: 0.375rem;
+    }
+
+    .lang-btn {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+    }
+
+    .contact-btn {
+        padding: 0.375rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .hero {
+        padding-top: calc(88px + 1rem);
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+        padding: 0 1rem;
+        margin-top: 1rem;
+    }
+
+    .hero .subtitle {
+        font-size: 1.125rem;
+        padding: 0 1rem;
+    }
+
+    .hero .description {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    .case-studies-container {
+        padding: 0;
+    }
+
+    .case-card {
+        flex: 0 0 calc(100% - 2rem);
+        margin: 0 1rem;
+    }
+
+    .slider-controls {
+        padding: 0 0.5rem;
+    }
+
+    .prev-btn, .next-btn {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .form {
+        padding: 3rem 1rem;
+    }
+    
+    .form h2 {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .form-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .form-features {
+        padding: 1.5rem;
+        order: 2;
+    }
+    
+    .form-features h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-features li {
+        font-size: 0.875rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    #contact-form {
+        gap: 1rem;
+        order: 1;
+    }
+    
+    #contact-form input {
+        padding: 0.875rem;
+        font-size: 0.875rem;
+    }
+    
+    #contact-form button {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.875rem;
+        width: 100%;
+    }
+
+    .form-features li svg {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .case-card {
+        flex: 0 0 calc(50% - 2rem);
+    }
+}
+
+@media (min-width: 1025px) {
+    .case-card {
+        flex: 0 0 calc(33.333% - 2rem);
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 0.5rem;
+    }
+
+    .nav-container {
+        gap: 0.375rem;
+    }
+
+    .logo {
+        font-size: 0.875rem;
+    }
+
+    .logo img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .nav-controls {
+        gap: 0.5rem;
+    }
+
+    .lang-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .contact-btn {
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+    }
+
+    .hero {
+        padding-top: calc(88px + 1rem);
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero .subtitle {
+        font-size: 1.125rem;
+    }
+
+    .case-card h3 {
+        font-size: 1.25rem;
+    }
+
+    .manual-metrics h4, .automated-metrics h4 {
+        font-size: 1.125rem;
+    }
+
+    .benefits-grid,
+    .implementation-steps,
+    .testimonials-container {
+        grid-template-columns: 1fr;
+    }
+
+    .form {
+        padding: 2rem 1rem;
+    }
+    
+    .form h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-container {
+        gap: 1.5rem;
+    }
+    
+    .form-features {
+        padding: 1.25rem;
+    }
+    
+    .form-features h3 {
+        font-size: 1.125rem;
+        margin-bottom: 1.25rem;
+    }
+    
+    .form-features li {
+        font-size: 0.8125rem;
+        margin-bottom: 0.625rem;
+    }
+    
+    #contact-form input {
+        padding: 0.75rem;
+        font-size: 0.8125rem;
+    }
+    
+    #contact-form button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.8125rem;
+    }
+    
+    .privacy {
+        font-size: 0.75rem;
+    }
+
+    .form-features li svg {
+        width: 18px;
+        height: 18px;
+    }
+} 
