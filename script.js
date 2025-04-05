@@ -1026,14 +1026,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     
-    // Form submission
+    /* // Form submission
     domCache.form.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         console.log('Form data:', Object.fromEntries(formData));
         alert('Obrigado! Entraremos em contato em breve.');
         e.target.reset();
-    });
+    }); */
     
     // Scroll to form
     document.querySelectorAll('a[href="#form"], .contact-btn, .cta-button').forEach(btn => {
