@@ -101,14 +101,15 @@
                         <li><i data-lucide="check-circle"></i> Suporte técnico especializado e contínuo</li>
                     </ul>
                 </div>
-                <form id="contact-form">
-                    <input type="text" name="name" placeholder="Nome" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="tel" name="phone" placeholder="Telefone" required>
-                    <input type="text" name="company" placeholder="Empresa" required>
-                    <button type="submit">Receber Proposta Personalizada</button>
+                <form id="contact-form" method="POST" action="https://script.google.com/macros/s/AKfycbwXVYHATi89zeKkZI1HGbWj1cb3Z7KX_mP2H1wXJmlLG0hytYUmRFOxci2AjQZ_Lf3AYg/exec">
+                    <input type="text" name="name" required placeholder="Nome">
+                    <input type="email" name="email" required placeholder="Email">
+                    <input type="tel" name="phone" required placeholder="Telefone">
+                    <input type="text" name="company" required placeholder="Empresa">
+                    <button type="submit">Enviar</button>
                     <p class="privacy">Seus dados estão seguros conosco. Não compartilhamos suas informações.</p>
                 </form>
+                <div id="form-status" style="margin-top: 15px; font-weight: bold; min-height: 1.2em;"></div>
             </div>
         </section>
     </main>
@@ -119,5 +120,106 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // Garante que o script só roda depois que o HTML foi completamente carregado
+        document.addEventListener('DOMContentLoaded', (event) => {
+            
+            const form = document.getElementById('contact-form'); // Usa o ID do seu formulário
+            const statusDiv = document.getElementById('form-status'); // Usa o ID da div de status
+
+            // Verifica se ambos os elementos essenciais foram encontrados
+            if (!form) {
+                console.error('Erro Crítico: Formulário com ID "contact-form" não encontrado no DOM.');
+                return; // Interrompe a execução do script se o form não existe
+            }
+            if (!statusDiv) {
+                console.error('Erro Crítico: Elemento com ID "form-status" não encontrado no DOM.');
+                // Poderia continuar sem a div de status, mas é melhor avisar.
+                // Se quiser que funcione sem a div, remova este 'if' e as linhas que usam statusDiv.
+            }
+
+            // Adiciona o listener ao evento de submit do formulário
+            form.addEventListener('submit', function(e) {
+                e.preventDefault(); // Impede o comportamento padrão de submit (recarregar página)
+
+                const formData = new FormData(form);
+                
+                // Mostra mensagem de envio e desabilita botão
+                if (statusDiv) {
+                    statusDiv.innerHTML = 'Enviando seus dados, aguarde...';
+                    statusDiv.style.color = '#333'; // Cor neutra
+                    statusDiv.style.display = 'block'; // Garante visibilidade
+                }
+                const submitButton = form.querySelector('button[type="submit"]');
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.style.opacity = 0.7; 
+                }
+
+                // Envia os dados usando Fetch API para a URL definida no 'action' do form
+                fetch(form.action, { 
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => {
+                    // Verifica se a resposta da rede foi bem sucedida (status 2xx)
+                    if (!response.ok) {
+                        // Se não foi OK, tenta ler o corpo da resposta como texto para dar mais detalhes
+                        return response.text().then(text => {
+                            // Lança um erro que será pego pelo .catch()
+                            throw new Error(`Erro do Servidor: ${response.status} ${response.statusText}. Detalhes: ${text}`);
+                        });
+                    }
+                    // Se a resposta foi OK, tenta processá-la como JSON
+                    return response.json(); 
+                })
+                .then(data => {
+                    // Processa a resposta JSON do Apps Script
+                    if (data.result === 'success') {
+                        if (statusDiv) {
+                            statusDiv.innerHTML = 'Obrigado! Seus dados foram enviados com sucesso.';
+                            statusDiv.style.color = 'green'; 
+                        }
+                        form.reset(); // Limpa o formulário
+                        console.log('Formulário enviado com sucesso. Resposta:', data);
+                    } else {
+                        // Se o Apps Script retornou {result: 'error', error: '...'}
+                        if (statusDiv) {
+                            statusDiv.innerHTML = 'Ops! Ocorreu um erro ao processar seus dados. Tente novamente.';
+                            statusDiv.style.color = 'red';
+                        }
+                        // Loga o erro específico retornado pelo script
+                        console.error('Erro retornado pelo Apps Script:', data.error || 'Erro desconhecido retornado pelo script.');
+                    }
+                })
+                .catch(error => {
+                    // Captura erros de rede, falha na conversão para JSON, ou o erro lançado pelo !response.ok
+                    console.error('Erro durante o envio ou processamento da resposta:', error);
+                    if (statusDiv) {
+                        statusDiv.innerHTML = 'Erro de comunicação ao enviar. Verifique sua conexão ou tente mais tarde.';
+                        statusDiv.style.color = 'red'; 
+                    }
+                })
+                .finally(() => {
+                    // Bloco 'finally' sempre executa, após sucesso ou erro do 'fetch'
+                    // Reabilita o botão de submit
+                    if (submitButton) {
+                        submitButton.disabled = false;
+                        submitButton.style.opacity = 1;
+                    }
+                    // Esconde a mensagem de status após um tempo
+                    if (statusDiv) {
+                        setTimeout(() => {
+                            if (statusDiv.style.display !== 'none') { // Só esconde se ainda estiver visível
+                                statusDiv.style.display = 'none';
+                                statusDiv.innerHTML = ''; 
+                            }
+                        }, 7000); // 7 segundos
+                    }
+                });
+            }); // Fim do form.addEventListener
+
+        }); // Fim do document.addEventListener('DOMContentLoaded')
+    </script>
 </body>
 </html>
